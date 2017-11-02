@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Categoria implements Serializable{
@@ -24,7 +25,8 @@ public class Categoria implements Serializable{
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(generator="gencategoria",strategy=GenerationType.IDENTITY)
+	@SequenceGenerator(name="gencategoria",sequenceName="categoria_cod_seq")
 	public Integer getId() {
 		return id;
 	}
