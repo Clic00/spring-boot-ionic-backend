@@ -16,7 +16,6 @@ public class Categoria implements Serializable{
 	private String nome;
 	
 	public Categoria() {
-		
 	}
 
 	public Categoria(Integer id, String nome) {
@@ -66,6 +65,11 @@ public class Categoria implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Categoria [id=" + id + ", nome=" + nome + "]";
 	}
 
 	
