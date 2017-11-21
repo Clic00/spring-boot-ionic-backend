@@ -1,0 +1,116 @@
+swagger: '2.0'
+info:
+  title: Lista de Clientes e seus endereços
+  description: Essa API provê o acesso aos Clientes e seus endereços e telefones
+  contact:
+    name: José Levy
+    email: clic00@yahoo.com
+  version: 0.0.1
+host: api.clic00.com
+schemes:
+  - https
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /clientes:
+    get:
+      summary: 'Lista dos Clientes, com endereços e telefone associados'
+      description: >
+        Este endpoint retorna todos os Clientes e respectivos endereços e
+        telefones.
+      tags:
+        - Clientes
+      responses:
+        '200':
+          description: Uma lista (Array) de Clientes com endereço e telefone
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Cliente'
+        '404':
+          description: Recurso não encontrado!
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Erro interno do servidor
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Erro inesperado
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Cliente:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código do Cliente
+      nome:
+        type: string
+        description: Nome do Cliente
+      email:
+        type: string
+        description: eMail do Cliente
+      cpfOuCnpj:
+        type: string
+        description: C.P.F. ou C.N.P.J. do Cliente
+      tipo:
+        type: string
+        description: tipo de Cliente (PF ou PJ)
+      Endereco:
+        description: Endereço do Cliente com Cidade e Estado...
+        type: object
+        properties:
+          id:
+            type: integer
+            description: codigo do endereço
+          logradouro:
+            type: string
+            description: 'Logradouro, rua,tv ou passagem'
+          numero:
+            type: string
+            description: número do imóvel
+          complemento:
+            type: string
+            description: 'Apto, sala, bloco...'
+          bairro:
+            type: string
+            description: Bairro da localização
+          cep:
+            type: string
+            description: Código de endereçamento posta
+          Cidade:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: código da Cidade
+              nome:
+                type: string
+                description: cidade ou município associado
+              Estado:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: código da UF
+                  nome:
+                    type: string
+                    description: nome da Unidade da Federação
+      telefone:
+        type: array
+        items:
+          type: string
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      datetime:
+        type: string
+        format: date-time

@@ -1,0 +1,220 @@
+swagger: '2.0'
+info:
+  title: Lista de Pedidos de clientes com seus produtos e formas de pagamento
+  description: >-
+    Essa API provê o acesso aos pedidos dos clientes cadastrados e os itens do
+    pedido com as formas de pagamento
+  contact:
+    name: José Levy
+    email: clic00@yahoo.com
+  version: 0.0.1
+host: api.clic00.com
+schemes:
+  - https
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /Pedidos:
+    get:
+      summary: >-
+        Lista dos Pedidos de Clientes, com produtos, forma de pagamento e itens
+        associados
+      description: >
+        Este endpoint retorna todos os Pedidos e respectivos produtos e
+        clientes.
+      tags:
+        - Pedidos
+      responses:
+        '200':
+          description: Uma lista (Array) de Pedidos de clientes e produtos e itens
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Pedido'
+        '404':
+          description: Recurso não encontrado!
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Erro interno do servidor
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Erro inesperado
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Pedido:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: código do pedido
+      instante:
+        type: string
+        description: data e hora do pedido
+      Pagamento:
+        type: object
+        description: forma de pagamento e parcelas
+        properties:
+          id:
+            type: integer
+            description: código do pagamento
+          estado:
+            type: string
+            description: situação do pagamento
+          PagamentoComCartao:
+            type: object
+            description: Pagamento efetuado com cartão de crédito
+            properties:
+              numeroDeParcelas:
+                type: integer
+                description: quantidade de parcelas para pagamentos com cartão
+          PagamentoComBoleto:
+            type: object
+            description: pagamento a vista com dinheiro ou débito
+            properties:
+              dataVencimento:
+                type: string
+                description: data do vencimento do boleto
+              dataPagamento:
+                type: string
+                description: data do pagamento efetuado
+      Cliente:
+        type: object
+        properties:
+          id:
+            type: integer
+            description: Código do Cliente
+          nome:
+            type: string
+            description: Nome do Cliente
+          email:
+            type: string
+            description: eMail do Cliente
+          cpfOuCnpj:
+            type: string
+            description: C.P.F. ou C.N.P.J. do Cliente
+          tipo:
+            type: string
+            description: tipo de Cliente (PF ou PJ)
+          Endereco:
+            description: Endereço do Cliente com Cidade e Estado...
+            type: object
+            properties:
+              id:
+                type: integer
+                description: codigo do endereço
+              logradouro:
+                type: string
+                description: 'Logradouro, rua,tv ou passagem'
+              numero:
+                type: string
+                description: número do imóvel
+              complemento:
+                type: string
+                description: 'Apto, sala, bloco...'
+              bairro:
+                type: string
+                description: Bairro da localização
+              cep:
+                type: string
+                description: Código de endereçamento posta
+              Cidade:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: código da Cidade
+                  nome:
+                    type: string
+                    description: cidade ou município associado
+                  Estado:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: código da UF
+                      nome:
+                        type: string
+                        description: nome da Unidade da Federação
+          telefone:
+            type: array
+            items:
+              type: string
+      enderecoDeEntrega:
+        description: Endereço do Cliente para a entrega dos pedidos...
+        type: object
+        properties:
+          id:
+            type: integer
+            description: codigo do endereço
+          logradouro:
+            type: string
+            description: 'Logradouro, rua,tv ou passagem'
+          numero:
+            type: string
+            description: número do imóvel
+          complemento:
+            type: string
+            description: 'Apto, sala, bloco...'
+          bairro:
+            type: string
+            description: Bairro da localização
+          cep:
+            type: string
+            description: Código de endereçamento posta
+          Cidade:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: código da Cidade
+              nome:
+                type: string
+                description: cidade ou município associado
+              Estado:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: código da UF
+                  nome:
+                    type: string
+                    description: nome da Unidade da Federação
+      itens:
+        type: object
+        properties:
+          desconto:
+            type: number
+            description: desconto dado no ato da compra
+          quantidade:
+            type: integer
+            description: número de intens comprados
+          preco:
+            type: number
+            description: valor do produto sem desconto
+          Produto:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: codigo do produto
+              nome:
+                type: string
+                description: Nome do produto
+              preco:
+                type: number
+                description: valor monetário do produto
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      datetime:
+        type: string
+        format: date-time

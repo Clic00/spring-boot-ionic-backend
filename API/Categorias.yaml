@@ -1,0 +1,75 @@
+swagger: '2.0'
+info:
+  title: Lista de Categorias e seus produtos
+  description: Essa API provê o acesso as categorias de produtos do sistema
+  contact:
+    name: José Levy
+    email: clic00@yahoo.com
+  version: 0.0.1
+host: api.clic00.com
+schemes:
+  - https
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /categorias:
+    get:
+      summary: Lista das categorias e produtos associados
+      description: >
+        Este endpoint retorna todos as categorias e respectivos produtos a cada
+        categoria associada.
+      tags:
+        - Categorias
+      responses:
+        '200':
+          description: Uma lista (Array) de categorias e seus produtos
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Categoria'
+        '404':
+          description: Recurso não encontrado!
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Erro interno do servidor
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Erro inesperado
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Categoria:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código da categoria
+      nome:
+        type: string
+        description: Nome da categoria
+      Produto:
+        type: object
+        properties:
+          id:
+            type: integer
+            description: codigo do produto
+          nome:
+            type: string
+            description: Nome do produto
+          preco:
+            type: number
+            description: valor monetário do produto
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      datetime:
+        type: string
+        format: date-time

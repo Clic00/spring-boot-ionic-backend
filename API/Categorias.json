@@ -1,0 +1,85 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Categorias e seus produtos",
+    "description": "Essa API provê o acesso as categorias de produtos do sistema",
+    "contact": {
+      "name": "Jackson Pires",
+      "email": "jack@jack.com"
+    },
+    "version": "0.0.1"
+  },
+  "host": "api.meusite.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/v1",
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "Lista dos Usuários",
+        "description": "Este endpoint retorna todos os usuários cadastrados no sistema.\n",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "Uma lista (Array) de usuários",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "Erro inesperado",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Código do usuário"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email do usuário"
+        },
+        "name": {
+          "type": "string",
+          "description": "Nome do usuário"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
