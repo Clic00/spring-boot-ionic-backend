@@ -43,6 +43,13 @@ public class CategoriaResource {
 
 		// Deve retornar um conteúdo vazio na atualização
 		return ResponseEntity.noContent().build();
+	}	
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) { 
+		service.delete(id);
+		return ResponseEntity.noContent().build();
 	}
+ 
 	
 }
