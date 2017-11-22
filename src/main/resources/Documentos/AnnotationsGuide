@@ -17,9 +17,13 @@
 @Scope:
 	Annotation utilizada para marcar o tempo de vida de um objeto gerenciado pelo container. Pode ser utilizada em classes anotadas com @Component, ou alguma de suas derivações. Além disso também pode usada em métodos anotados com @Bean. Quando você não utiliza nenhuma, o escopo default do objeto é o de aplicação, o que significa que vai existir apenas uma instância dele durante a execução do programa. Você alterar isso, anotando o local e usando alguma das constantes que existem na classe ConfigurableBeanFactory ou WebApplicationContext.
 @RequestMapping:
-	Geralmente utilizada em cima dos métodos de uma classe anotada com @Controller. Serve para você colocar os endereços da sua aplicação que, quando acessados por algum cliente, deverão ser direcionados para o determinado método.
+	Geralmente utilizada em cima dos métodos de uma classe anotada com @Controller. 
+	Serve para você colocar os endereços da sua aplicação que, quando acessados por algum cliente, 
+	deverão ser direcionados para o determinado método.
 @ResponseBody:
-	Utilizada em métodos anotados com @RequestMapping para indicar que o retorno do método deve ser automaticamente escrito na resposta para o cliente. Muito comum quando queremos retornar JSON ou XML em função de algum objeto da aplicação.
+	Utilizada em métodos anotados com @RequestMapping para indicar que o retorno do método deve ser automaticamente 
+	escrito na resposta para o cliente. Muito comum quando queremos retornar JSON ou XML em função de algum objeto 
+	da aplicação.
 @Primary:
 	Caso você tenha dois métodos anotados com @Bean e com ambos retornando o mesmo tipo de objeto, como o Spring vai saber qual dos dois injetar por default em algum ponto da sua aplicação? É para isso que serve a annotation @Primary. Indica qual é a opção padrão de injeção. Caso você não queira usar a padrão, pode recorrer a annotation @Qualifier.
 @Profile:
