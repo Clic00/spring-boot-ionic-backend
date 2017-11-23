@@ -1,5 +1,7 @@
 package com.clic00.cursomc.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -23,25 +25,32 @@ public class CategoriaService {
 		}
 		return obj;
 	}
-	
+
 	public Categoria insert(Categoria obj) {
 		obj.setId(null);
 		return repo.save(obj);
 	}
-	
+
 	public Categoria update(Categoria obj) {
 		find(obj.getId());
 		return repo.save(obj);
 	}
-	
+
 	public void delete(Integer id) {
 		find(id);
 		try {
-			repo.delete(id);			
-		}catch(DataIntegrityViolationException e){
-			throw new DataIntegrityException(
-					"Não é possível excluir Categoria que possua produtos! Id:" + id 
+			repo.delete(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir Categoria que possua produtos! Id:" + id
 					+ ", tipo: " + Categoria.class.getName());
+		}
+	}
+
+	public List<Categoria> findAll() {
+		try {
+			return repo.findAll();
+		} catch (ObjectNotFoundException e) {
+			throw new ObjectNotFoundException("Objeto não encontrado! Tipo: " + Categoria.class.getName());
 		}
 	}
 }
