@@ -1,0 +1,9 @@
+URL do banco de dados no Heroku 
+ mysql://bfdc8dea656101:4650af44@us-cdbr-iron-east-05.cleardb.net/heroku_2d1f20dc7b67274?reconnect=true
+
+
+ 
+ 
+ 
+ 
+ mysql --host=us-cdbr-iron-east-05.cleardb.net --user=bfdc8dea656101 --password=4650af44 --reconnect heroku_2d1f20dc7b67274 < arquivo.sql
