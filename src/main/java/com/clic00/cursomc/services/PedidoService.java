@@ -27,16 +27,16 @@ public class PedidoService {
 
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
-	
+
 	@Autowired
 	private ProdutoRepository produtoRepository;
-	
+
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
-	
+
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
+
 	@Autowired
 	private EmailService emailService;
 
@@ -63,16 +63,16 @@ public class PedidoService {
 		obj = repo.save(obj);
 
 		pagamentoRepository.save(obj.getPagamento());
-		
-		for(ItemPedido ip : obj.getItens()) {
+
+		for (ItemPedido ip : obj.getItens()) {
 			ip.setDesconto(0.0);
 			ip.setProduto(produtoRepository.findOne(ip.getProduto().getId()));
 			ip.setPreco(ip.getProduto().getPreco());
-			ip.setPedido(obj);	
+			ip.setPedido(obj);
 		}
-		
+
 		itemPedidoRepository.save(obj.getItens());
-//		System.out.println(obj);
+		// System.out.println(obj);
 		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 	}
