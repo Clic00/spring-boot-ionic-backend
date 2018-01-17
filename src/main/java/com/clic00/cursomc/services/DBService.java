@@ -123,7 +123,7 @@ public class DBService {
 		cli1.addPerfil(Perfil.ADMIN);
 		
 		
-		Cliente cli2 = new Cliente(null, "Rosana Kalil", "tialinda@gmail.com", "132.143.655-90",
+		Cliente cli2 = new Cliente(null, "Maria Lima", "tiamaria@gmail.com", "132.143.655-90",
 				TipoCliente.PESSOA_JURIDICA, bCrypt.encode("123"));
 
 		cli1.getTelefones().addAll(Arrays.asList("(51)4356-5678", "(51)98789-5677"));
