@@ -20,6 +20,7 @@ import com.clic00.cursomc.domain.PagamentoComCartao;
 import com.clic00.cursomc.domain.Pedido;
 import com.clic00.cursomc.domain.Produto;
 import com.clic00.cursomc.domain.enums.EstadoPagamento;
+import com.clic00.cursomc.domain.enums.Perfil;
 import com.clic00.cursomc.domain.enums.TipoCliente;
 import com.clic00.cursomc.repositories.CategoriaRepository;
 import com.clic00.cursomc.repositories.CidadeRepository;
@@ -116,7 +117,12 @@ public class DBService {
 		estadoRepository.save(Arrays.asList(uf1, uf2, uf3));
 		cidadeRepository.save(Arrays.asList(ue1, ue2, ue3, ue4));
 
-		Cliente cli1 = new Cliente(null, "José Levy", "tiobonito@gmail.com", "243.354.005-56", TipoCliente.PESSOA_FISICA,bCrypt.encode("123"));
+		Cliente cli1 = new Cliente(null, "José Levy", "tiobonito@gmail.com", "373.727.002-30", 
+				TipoCliente.PESSOA_FISICA,bCrypt.encode("123"));
+		
+		cli1.addPerfil(Perfil.ADMIN);
+		
+		
 		Cliente cli2 = new Cliente(null, "Rosana Kalil", "tialinda@gmail.com", "132.143.655-90",
 				TipoCliente.PESSOA_JURIDICA, bCrypt.encode("123"));
 
