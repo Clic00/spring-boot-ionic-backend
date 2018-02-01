@@ -59,6 +59,8 @@ public class Cliente implements Serializable {
 		return "Cliente [id=" + id + ", nome=" + nome + ", email=" + email + ", cpfOuCnpj=" + cpfOuCnpj + ", tipo="
 				+ tipo + "]";
 	}
+	
+	private String urlImage;
 
 	public Cliente() {
 		addPerfil(Perfil.CLIENTE);
@@ -178,6 +180,14 @@ public class Cliente implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
 	}
 
 }
