@@ -5,15 +5,27 @@ import java.io.Serializable;
 public class StandardError implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private String timeStamp;
 	private Integer status;
+	private String error;
 	private String msg;
-	private String instante;
-	
-	public StandardError(Integer status, String msg, String instante) {
+	private String path;
+
+	public StandardError(String timeStamp, Integer status, String error, String msg, String path) {
 		super();
+		this.timeStamp = timeStamp;
 		this.status = status;
+		this.error = error;
 		this.msg = msg;
-		this.instante = instante;
+		this.path = path;
+	}
+
+	public String getTimeStamp() {
+		return timeStamp;
+	}
+
+	public void setTimeStamp(String timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 
 	public Integer getStatus() {
@@ -24,6 +36,14 @@ public class StandardError implements Serializable {
 		this.status = status;
 	}
 
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+
 	public String getMsg() {
 		return msg;
 	}
@@ -32,11 +52,12 @@ public class StandardError implements Serializable {
 		this.msg = msg;
 	}
 
-	public String getInstante() {
-		return instante;
+	public String getPath() {
+		return path;
 	}
 
-	public void setInstante( String instante) {
-		this.instante = instante;
+	public void setPath(String path) {
+		this.path = path;
 	}
+
 }
