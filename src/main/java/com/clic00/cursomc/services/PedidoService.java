@@ -79,7 +79,10 @@ public class PedidoService {
 
 		itemPedidoRepository.save(obj.getItens());
 		// System.out.println(obj);
-		emailService.sendOrderConfirmationEmail(obj);
+		// Envio email plano
+//		emailService.sendOrderConfirmationEmail(obj);
+		// Envio de email HTML
+		emailService.sendOrderConfirmationHtmlEmail(obj);
 		return obj;
 	}
 	
@@ -95,6 +98,4 @@ public class PedidoService {
 			
 		return repo.findByCliente(cliente, pageRequest);
 	}
-	
-
 }
